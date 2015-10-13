@@ -1,0 +1,27 @@
+aa_platform_home:
+    path:      /{page}
+    defaults:  { _controller: AAPlatformBundle:Advert:index, page: 1 }
+    requirements:
+        page: \d*
+
+aa_platform_view:
+    path:      /advert/{id}
+    defaults:  { _controller: AAPlatformBundle:Advert:view }
+    requirements:
+        id: \d+
+
+aa_platform_add:
+    path:      /add
+    defaults:  { _controller: AAPlatformBundle:Advert:add }
+
+aa_platform_edit:
+    path:      /edit/{id}
+    defaults:  { _controller: AAPlatformBundle:Advert:edit }
+    requirements:
+        id: \d+
+
+aa_platform_delete:
+    path:      /delete/{id}
+    defaults:  { _controller: AAPlatformBundle:Advert:delete }
+    requirements:
+        id: \d+

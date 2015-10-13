@@ -1,0 +1,3 @@
+aa_platform:
+    resource: "@AAPlatformBundle/Resources/config/routing.yml"
+    prefix:   /platform
