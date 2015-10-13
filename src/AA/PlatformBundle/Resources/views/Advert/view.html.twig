@@ -1,5 +1,13 @@
 <ul>
     <li><strong>Affichage de l'annonce d'id : </strong>{{ id }}</li>
     <li><strong>url généré : </strong>{{ url }}</li>
+    {% if tag %}
+    <li><strong>Tag : </strong >{{ tag }}</li>
+    {% endif %}
+    <ul>
+        {% for key, item in query %}
+            <li>{{ loop.index }} :: <strong>{{ key }}</strong> : {{ item }}</li>
+        {% endfor %}
+    </ul>
 </ul>
 <a href="{{ path('aa_platform_home') }}">Lien vers page home</a>

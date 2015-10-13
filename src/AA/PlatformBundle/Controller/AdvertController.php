@@ -3,6 +3,7 @@
 namespace AA\PlatformBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -19,7 +20,7 @@ class AdvertController extends Controller
         return new Response($content);
     }
 
-    public function viewAction($id)
+    public function viewAction($id, Request $request)
     {
         // On veut avoir l'url de l'annonce de l'id 5
         /*
@@ -37,6 +38,8 @@ class AdvertController extends Controller
             true
         );
 
+        $query = $request->query->all();
+        $tag = ($request->query->get('tag'))? $request->query->get('tag') : false;
 
         /*
          * Méthode longue
@@ -53,7 +56,9 @@ class AdvertController extends Controller
             ->renderView(
                 'AAPlatformBundle:Advert:view.html.twig', array(
                     'id' => $id,
-                    'url' => $url
+                    'url' => $url,
+                    'tag' => $tag,
+                    'query' => $query
                 )
             );
 

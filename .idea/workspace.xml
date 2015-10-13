@@ -25,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="routing.yml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AA/PlatformBundle/Resources/config/routing.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="757">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="672">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -38,8 +38,8 @@
       <file leaf-file-name="AdvertController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AA/PlatformBundle/Controller/AdvertController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="593" max-vertical-offset="1575">
-              <caret line="48" column="17" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
+            <state vertical-scroll-proportion="-9.148149" vertical-offset="593" max-vertical-offset="1680">
+              <caret line="40" column="14" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="14" />
               <folding>
                 <element signature="e#48#105#0#PHP" expanded="true" />
               </folding>
@@ -50,7 +50,7 @@
       <file leaf-file-name="Controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Controller/Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3005" max-vertical-offset="7980">
+            <state vertical-scroll-proportion="-6.9259257" vertical-offset="3005" max-vertical-offset="7980">
               <caret line="159" column="30" selection-start-line="159" selection-start-column="20" selection-end-line="159" selection-end-column="30" />
               <folding>
                 <element signature="e#292#337#0#PHP" expanded="true" />
@@ -59,11 +59,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view.html.twig" pinned="false" current-in-tab="false">
+      <file leaf-file-name="view.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AA/PlatformBundle/Resources/views/Advert/view.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="84" max-vertical-offset="210">
-              <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.23013699" vertical-offset="0" max-vertical-offset="730">
+              <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -89,9 +89,9 @@
         <option value="$PROJECT_DIR$/app/AppKernel.php" />
         <option value="$PROJECT_DIR$/app/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/AA/PlatformBundle/Resources/views/Advert/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/AA/PlatformBundle/Resources/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/AA/PlatformBundle/Controller/AdvertController.php" />
         <option value="$PROJECT_DIR$/src/AA/PlatformBundle/Resources/views/Advert/view.html.twig" />
-        <option value="$PROJECT_DIR$/src/AA/PlatformBundle/Resources/config/routing.yml" />
       </list>
     </option>
   </component>
@@ -510,9 +510,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/AA/PlatformBundle/Resources/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="672">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Controller/Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3005" max-vertical-offset="7980">
+        <state vertical-scroll-proportion="-6.9259257" vertical-offset="3005" max-vertical-offset="7980">
           <caret line="159" column="30" selection-start-line="159" selection-start-column="20" selection-end-line="159" selection-end-column="30" />
           <folding>
             <element signature="e#292#337#0#PHP" expanded="true" />
@@ -520,10 +528,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/ParameterBag.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28730822" vertical-offset="655" max-vertical-offset="6678">
+          <caret line="48" column="23" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Request.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22873083" vertical-offset="1873" max-vertical-offset="42357">
+          <caret line="104" column="52" selection-start-line="104" selection-start-column="52" selection-end-line="104" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/AA/PlatformBundle/Controller/AdvertController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="593" max-vertical-offset="1575">
-          <caret line="48" column="17" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
+        <state vertical-scroll-proportion="-9.148149" vertical-offset="593" max-vertical-offset="1680">
+          <caret line="40" column="14" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="14" />
           <folding>
             <element signature="e#48#105#0#PHP" expanded="true" />
           </folding>
@@ -532,16 +556,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AA/PlatformBundle/Resources/views/Advert/view.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="84" max-vertical-offset="210">
-          <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AA/PlatformBundle/Resources/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="699">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.23013699" vertical-offset="0" max-vertical-offset="730">
+          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
           <folding />
         </state>
       </provider>
