@@ -1,5 +1,34 @@
+************************************************************************
 Source
+----------
+----------
 https://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2
 
+************************************************************************
 13/10/2015
+----------
+----------
 https://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2/les-controleurs-avec-symfony2
+
+************************************************************************
+14/10/2015
+----------
+----------
+http://doctrine-dbal.readthedocs.org/en/latest/reference/types.html
+https://www.youtube.com/watch?v=hroVzuju-Yc
+https://www.youtube.com/watch?v=nm1obAL1xoo
+
+Create entity :
+-----------------------------------
+app/console doctrine:generate:entity
+=> generate entity and repository
+
+Create Schema or table in database
+-----------------------------------
+app/console doctrine:schema:create
+
+update Schema or table in database
+-----------------------------------
+app/console doctrine:schema:update --force
+
+

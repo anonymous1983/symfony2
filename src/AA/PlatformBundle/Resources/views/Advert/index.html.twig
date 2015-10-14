@@ -1,21 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Bienvenue sur ma première page avec OpenClassrooms !</title>
-</head>
-<body>
-<h1>Hello {{ nom }} !</h1>
+{% extends "::base.html.twig" %}
 
-<p>
-    Le Hello World est un grand classique en programmation.
-    Il signifie énormément, car cela veut dire que vous avez
-    réussi à exécuter le programme pour accomplir une tâche simple :
-    afficher ce hello world !
-</p>
+{% block body %}
 
-<p>
-    <a href="{{ path('aa_platform_view', {'id' : 5}, true) }}"> lient vers l'article 5</a>
-</p>
+    <ol>
+        <li>
+            <a href="{{ path('aa_platform_add') }}"> Add Advert</a>
+        </li>
+    </ol>
+    <h1>Hello {{ nom }} !</h1>
 
-</body>
-</html>
+    <p>
+        Le Hello World est un grand classique en programmation.
+        Il signifie énormément, car cela veut dire que vous avez
+        réussi à exécuter le programme pour accomplir une tâche simple :
+        afficher ce hello world !
+    </p>
+
+    <p>
+        <a href="{{ path('aa_platform_view', {'id' : 5}, true) }}"> lient vers l'article 5</a>
+    </p>
+
+
+{% endblock %}

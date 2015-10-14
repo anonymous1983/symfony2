@@ -1,27 +1,36 @@
 aa_platform_home:
     path:      /{page}
     defaults:  { _controller: AAPlatformBundle:Advert:index, page: 1 }
+    methods:  [GET]
     requirements:
         page: \d*
 
 aa_platform_view:
     path:      /advert/{id}
     defaults:  { _controller: AAPlatformBundle:Advert:view }
+    methods:  [GET]
     requirements:
         id: \d+
+
+aa_platform_all:
+    path:     /advert/all
+    defaults:  { _controller: AAPlatformBundle:Advert:all }
 
 aa_platform_add:
     path:      /add
     defaults:  { _controller: AAPlatformBundle:Advert:add }
+    methods:  [POST]
 
 aa_platform_edit:
     path:      /edit/{id}
     defaults:  { _controller: AAPlatformBundle:Advert:edit }
+    methods:  [GET]
     requirements:
         id: \d+
 
 aa_platform_delete:
     path:      /delete/{id}
     defaults:  { _controller: AAPlatformBundle:Advert:delete }
+    methods:  [GET]
     requirements:
         id: \d+

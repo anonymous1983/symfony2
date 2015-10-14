@@ -1,0 +1,13 @@
+{% extends "::base.html.twig" %}
+
+{% block extends %}
+    <h1>List</h1>
+
+    <ul>
+        {% for advert in adverts %}
+            <h3>{{ advert.title }}</h3>
+            <img src="{{ advert.url }}" alt="{{ advert.title }}">
+        {% endfor %}
+
+    </ul>
+{% endblock %}
