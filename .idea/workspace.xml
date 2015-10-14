@@ -35,10 +35,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="all.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="all.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AA/PlatformBundle/Resources/views/Advert/all.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39680234" vertical-offset="0" max-vertical-offset="688">
+            <state vertical-scroll-proportion="-4.875" vertical-offset="0" max-vertical-offset="462">
               <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
               <folding>
                 <element signature="e#78#102#0#HTML" expanded="true" />
@@ -48,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdvertController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AdvertController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AA/PlatformBundle/Controller/AdvertController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.888889" vertical-offset="585" max-vertical-offset="1491">
-              <caret line="103" column="10" selection-start-line="103" selection-start-column="10" selection-end-line="103" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.61924684" vertical-offset="522" max-vertical-offset="1533">
+              <caret line="111" column="41" selection-start-line="111" selection-start-column="41" selection-end-line="111" selection-end-column="41" />
               <folding>
                 <element signature="e#48#105#0#PHP" expanded="true" />
                 <element signature="e#626#2202#0#PHP" expanded="false" />
@@ -139,8 +139,8 @@
         <option value="$PROJECT_DIR$/src/AA/PlatformBundle/Resources/views/Advert/index.html.twig" />
         <option value="$PROJECT_DIR$/src/AA/PlatformBundle/Entity/Advert.php" />
         <option value="$PROJECT_DIR$/src/AA/PlatformBundle/Resources/config/routing.yml" />
-        <option value="$PROJECT_DIR$/src/AA/PlatformBundle/Controller/AdvertController.php" />
         <option value="$PROJECT_DIR$/src/AA/PlatformBundle/Resources/views/Advert/all.html.twig" />
+        <option value="$PROJECT_DIR$/src/AA/PlatformBundle/Controller/AdvertController.php" />
       </list>
     </option>
   </component>
@@ -743,25 +743,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AA/PlatformBundle/Controller/AdvertController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.888889" vertical-offset="585" max-vertical-offset="1491">
-          <caret line="103" column="10" selection-start-line="103" selection-start-column="10" selection-end-line="103" selection-end-column="10" />
-          <folding>
-            <element signature="e#48#105#0#PHP" expanded="true" />
-            <element signature="e#626#2202#0#PHP" expanded="false" />
-            <element signature="e#2208#2464#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AA/PlatformBundle/Resources/views/Advert/all.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39680234" vertical-offset="0" max-vertical-offset="688">
+        <state vertical-scroll-proportion="-4.875" vertical-offset="0" max-vertical-offset="462">
           <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
           <folding>
             <element signature="e#78#102#0#HTML" expanded="true" />
             <element signature="e#271#297#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AA/PlatformBundle/Controller/AdvertController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.61924684" vertical-offset="522" max-vertical-offset="1533">
+          <caret line="111" column="41" selection-start-line="111" selection-start-column="41" selection-end-line="111" selection-end-column="41" />
+          <folding>
+            <element signature="e#48#105#0#PHP" expanded="true" />
+            <element signature="e#626#2202#0#PHP" expanded="false" />
+            <element signature="e#2208#2464#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
