@@ -109,7 +109,7 @@ class AdvertController extends Controller
     public function addAction()
     {
 
-        $entity = $this->getDoctrine()->getEntityManager();
+        $entity = $this->getDoctrine()->getManager();
 
         $advert = new Advert();
         $advert->setTitre("Mercedes classe c garantie 2017")

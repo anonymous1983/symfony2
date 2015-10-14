@@ -17,9 +17,9 @@ aa_platform_all:
     defaults:  { _controller: AAPlatformBundle:Advert:all }
 
 aa_platform_add:
-    path:      /add
+    path:      /advert/add
     defaults:  { _controller: AAPlatformBundle:Advert:add }
-    methods:  [POST]
+    # methods:  [POST]
 
 aa_platform_edit:
     path:      /edit/{id}
