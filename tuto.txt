@@ -31,4 +31,21 @@ update Schema or table in database
 -----------------------------------
 app/console doctrine:schema:update --force
 
+************************************************************************
+15/10/2015
+----------
+----------
+http://www.wildatlanticway.com/home/?gclid=CNn3tqT6w8gCFcFuGwodH-QDqg#53.475958|-7.800000|7
+
+Download packages composer
+-----------------------------------
+https://packagist.org
+
+to install new package
+-----------------------------------
+composer require twitter/bootstrap 3.3.5
+
+### ACME :  American Company Making Everything (Compagnie Américaine Fabriquant Tout) :) ###
+### http://loopback.io/
+### https://strongloop.com/strongblog/node-js-php-get-started/
 
