@@ -1,0 +1,64 @@
+<div class="md-body-center view-expense-report-add">
+
+  <md-content class="md-form md-whiteframe-z2">
+
+    <md-toolbar layout="row" layout-align="space-between center">
+      <h2 class="md-toolbar-tools">
+        <span class="">AJOUTER UN NOUVEL ÉVÈNEMENT</span>
+      </h2>
+      <div class="expense-report-next-id">Id: #{{expenseReportAdd.obj.expenseReportId}}</div>
+    </md-toolbar>
+
+    <md-content layout-padding>
+
+      <form name="formBillAdd" ng-submit="expenseReportAdd.submit()">
+
+        <div layout layout-sm="column">
+          <md-input-container flex>
+            <md-switch
+            ng-model="expenseReportAdd.obj.expenseReport_p_in_idf"
+            aria-label="Dépense en île de France"
+            ng-true-value="'y'"
+            ng-false-value="'n'"
+            class="md-warn">
+              <label>Dépense en île de France</label>
+          </md-input-container>
+
+          <md-input-container flex>
+            <label>Type</label>
+            <md-select ng-model="expenseReportAdd.obj.expenseReport_p_expense_report_type" required>
+              <md-option ng-repeat="type in main.constantBillReason" value="{{type.code}}">{{type.description}}</md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+
+        <div layout layout-sm="column">
+          <md-input-container flex>
+            <label>Justification</label>
+            <textarea ng-model="expenseReportAdd.obj.expenseReport_p_justification" columns="1" md-maxlength="250" required></textarea>
+          </md-input-container>
+        </div>
+
+        <div layout="row" layout-align="center">
+
+          <div layout="row" layout-align="end center" flex>
+
+            <md-button
+            ui-sref="main.expenseReportList"
+            type="reset">Annuler
+            </md-button>
+
+            <md-button
+            type="submit"
+            class="md-raised md-primary"
+            ng-disabled="formBillAdd.$invalid">Enregistrer
+            </md-button>
+
+          </div>
+
+        </div>
+      </form>
+    </md-content>
+  </md-content>
+
+</div>

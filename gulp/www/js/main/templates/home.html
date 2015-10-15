@@ -1,0 +1,147 @@
+<div class="home-container">
+  <div class="quick-access">
+    <a class="btn-quick-access btn-add-expense" ui-sref="main.expenseReportList">
+      <i class="fa fa-file-text-o"></i>
+      <span class="label">
+        <span class="sub-title">Ajoutez</span>
+        <span class="title">un frais</span>
+      </span>
+    </a>
+    <a class="btn-quick-access btn-geolocation" href="">
+      <i class="fa fa-map-marker"></i>
+      <span class="label">
+        <span class="sub-title">Points</span>
+        <span class="title">d'interêts</span>
+      </span>
+    </a>
+
+    <div class="btn-quick-access btn-camera" href="" style="background-image: url({{home.expenseBillPicture.img}})">
+      <i class="fa fa-camera"></i>
+      <span class="label">
+        <span class="sub-title">Numérisez une</span>
+        <span class="title">facturette</span>
+      </span>
+      <am-file
+      name="image"
+      class="select-file"
+      ng-model="home.expenseBillPicture"
+      accept="image/gif, image/jpeg, image/png, image/*"
+      />
+    </div>
+  </div>
+
+  <a class="draft-quick-access" href="">
+    <div class="section-left">
+      <div class="section-content">
+        <div class="nbr">{{home.draft.nbOfExpenseReport}}</div>
+        <div class="label">
+          <span class="sub-title">Note de frais</span>
+          <span class="title">en draft</span>
+        </div>
+      </div>
+    </div>
+    <div class="section-right">
+      <div class="section-amount">
+        <div class="amount">
+          {{home.draft.expenseReportTotal[0]}}
+        </div>
+        <div class="section-amount-aside">
+          <span class="currency">&euro;</span>
+          <span class="sub-amount">{{home.draft.expenseReportTotal[1]}}</span>
+        </div>
+        <div class="section-float">
+          <div class="fa fa-angle-right"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </a>
+
+  <div class="last-draft-bill">
+    <div class="header">
+      <div class="section-left"><i class="fa fa-calendar"></i>événements</div>
+      <div class="section-right"></div>
+    </div>
+    <div class="items">
+
+      <div class="item " id="item-expense-report-id-{{$index}}"
+           ng-repeat="expenseReport in home.expenseReportList | orderBy : 'expenseReportId' : reverse">
+        <div class="item-header">
+          <i class="fa fa-file-text-o"></i>
+
+          <div class="title">{{expenseReport.expenseReportJustification}}</div>
+
+          <div class="section-flex-row sub-items-add-bill">
+            <a href="" class="btn-submit-report fa fa-check"
+               ng-click="home.expenseReportSubmit(expenseReport.expenseReportId, $index)"></a>
+          </div>
+        </div>
+        <!--div class="item-body">
+          <div class="sub-items section-flex-row">
+
+            <div class="sub-item">
+
+              <div class="section-description">
+                <div class="description-icon fa fa-cutlery"></div>
+                <div class="description-text">
+                  <div class="label">Restaurant</div>
+                  <div class="date">Mardi le <span class="sub-date">18/07/2015</span></div>
+                </div>
+              </div>
+
+              <div class="section-amount sub-item-amount">
+                <div class="amount">
+                  64
+                </div>
+                <div class="section-amount-aside">
+                  <span class="currency">&euro;</span>
+                  <span class="sub-amount">30</span>
+                </div>
+              </div>
+
+            </div>
+            <div class="sub-item">
+
+              <div class="section-description">
+                <div class="description-icon fa fa-bed"></div>
+                <div class="description-text">
+                  <div class="label">Hôtel</div>
+                  <div class="date">Mardi le <span class="sub-date">18/07/2015</span></div>
+                </div>
+              </div>
+
+              <div class="section-amount sub-item-amount">
+                <div class="amount">
+                  123
+                </div>
+                <div class="section-amount-aside">
+                  <span class="currency">&euro;</span>
+                  <span class="sub-amount">45</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="section-flex-row sub-items-total">
+
+            <div class="section-amount">
+              <div class="amount">
+                789
+              </div>
+              <div class="section-amount-aside">
+                <span class="currency">&euro;</span>
+                <span class="sub-amount">00</span>
+              </div>
+            </div>
+
+          </div>
+          <div class="section-flex-row sub-items-add-bill">
+            <a href="" class="btn-add-bill fa fa-plus"></a>
+          </div>
+        </div-->
+      </div>
+    </div>
+  </div>
+</div>

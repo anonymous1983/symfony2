@@ -26,15 +26,15 @@
      * Env
      **/
     var env = {
-        base: __dirname + '/www',
-        index: __dirname + '/www/index.html',
-        less: __dirname + '/www/less/style.less',
-        lesssources: __dirname + '/www/less/**/*.less',
-        css: __dirname + '/www/css',
-        stylesources: __dirname + '/www/css/**/*.css',
+        base: __dirname + '/web',
+        index: __dirname + '/web/index.html',
+        less: __dirname + '/web/less/style.less',
+        lesssources: __dirname + '/web/less/**/*.less',
+        css: __dirname + '/web/css',
+        stylesources: __dirname + '/web/css/**/*.css',
 
-        mainapp: __dirname + '/www/js/app.js',
-        js: __dirname + '/www/js/**/*.js',
+        mainapp: __dirname + '/web/js/app.js',
+        js: __dirname + '/web/js/**/*.js',
         port: 9000,
         dist: __dirname + '/dist'
     };
@@ -51,9 +51,7 @@
 
 
     /******************************************************************************
-     *
      * CLEAN
-     *
      *******************************************************************************/
     gulp.task('clean', function () {
         return gulp.src(env.dist)
@@ -61,9 +59,7 @@
     });
 
     /******************************************************************************
-     *
      * BUILD
-     *
      *******************************************************************************/
     gulp.task('build', [
         'less',
@@ -119,9 +115,7 @@
     });
 
     /******************************************************************************
-     *
      * DEV
-     *
      *******************************************************************************/
     gulp.task('default', ['less', 'inject', 'connect', 'watches'], function () {
         return gutil.log('!=== App running on localhost:' + env.port + ' ===!');
@@ -173,7 +167,7 @@
             .pipe(inject(vendor, bowerOpt))
             .pipe(inject(css, opt))
             .pipe(inject(series(mainapp, js), opt))
-            .pipe(gulp.dest('./www/'));
+            .pipe(gulp.dest('./web/'));
 
     });
 

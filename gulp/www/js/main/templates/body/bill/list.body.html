@@ -1,0 +1,53 @@
+<div class="md-body-center view-expense-report-list">
+
+  <md-content class="md-form md-whiteframe-z2">
+
+    <md-toolbar layout="row" layout-align="start end">
+      <h2 class="md-toolbar-tools">
+        <span class="">SÉLECTIONNER OU AJOUTER UN ÉVÈNEMENT</span>
+      </h2>
+    </md-toolbar>
+
+    <md-content layout-padding>
+
+      <div ng-if="expenseReportList.scanPicture && expenseReportList.showPicture">
+        <div class="view-scan-picture" style="background-image: url({{expenseReportList.scanPicture.img}})"></div>
+      </div>
+
+      <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+        <md-button class="md-raised" ui-sref="main.expenseReportAdd({p:expenseReportList.showPicture})">CRÉER UNE NOUVEAU
+          EVENEMENT
+        </md-button>
+      </section>
+
+      <md-list>
+        <md-list-item
+        ng-click="expenseReportList.selectExpenseReport(expenseReport.expenseReportId)"
+        class="expense-report-list md-2-line"
+        ng-repeat="expenseReport in expenseReportList.expenseReportList | orderBy : 'expenseReportId' : reverse">
+
+          <md-icon>
+            <div class="icon fa fa-tag"></div>
+          </md-icon>
+          <div class="md-list-item-text">
+            <h3> {{ expenseReport.expenseReportJustification }} </h3>
+
+            <p> en cours </p>
+          </div>
+          <div class="amount" ng-class="{'md-offset': $index != 0 }">
+            <strong>{{ (expenseReport.expenseReportTotal)? expenseReport.expenseReportTotal : 0 }} &euro;</strong>
+          </div>
+        </md-list-item>
+      </md-list>
+
+      <section layout="row" layout-sm="column" layout-align="center center" layout-wrap ng-if="expenseReportList.expenseReportList.length > 5">
+        <md-button class="md-raised" ui-sref="main.expenseReportAdd({p:expenseReportList.showPicture})">CRÉER UNE NOUVEAU
+          EVENEMENT
+        </md-button>
+      </section>
+
+    </md-content>
+
+  </md-content>
+
+</div>

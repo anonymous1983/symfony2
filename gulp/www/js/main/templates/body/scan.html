@@ -1,0 +1,39 @@
+<div class="md-body-center view-scan">
+
+  <md-content class="md-form md-whiteframe-z2">
+
+    <md-content layout-padding>
+
+      <div class="view-scan-picture" style="background-image: url({{scan.picture.img}})">
+
+      </div>
+
+      <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+        <md-button class="md-raised">Recommencez
+          <am-file
+          name="image"
+          class="select-file"
+          ng-model="scan.picture"
+
+          accept="image/gif, image/jpeg, image/png"
+          />
+        </md-button>
+        <md-button class="md-raised">Enregistrer
+          <am-file
+          name="image"
+          class="select-file"
+          ng-model="scan.picture"
+
+          ng-click="scan.saveDraft()"
+          accept="image/gif, image/jpeg, image/png"
+          />
+        </md-button>
+        <md-button class="md-raised" ng-click="scan.submitDraft()">Valider</md-button>
+      </section>
+
+
+    </md-content>
+
+  </md-content>
+
+</div>

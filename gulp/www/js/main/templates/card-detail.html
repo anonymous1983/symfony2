@@ -1,0 +1,27 @@
+<div class="card-detail">
+  <div class="card-detail-wrap">
+
+    <div class="details">
+      <div class="details-header">
+        <div class="user_photo horizontal_center" id="user_photo">
+          <div class="avatar"></div>
+        </div>
+      </div>
+      <h1 id="user_info_title" class="user_info_title">{{user.name.first}} {{user.name.last}}</h1> <!-- {{user.name.first}} {{user.name.last}} -->
+
+      <div class="details-body">
+        <p id="user_info_job_title" class="user_info_job user_info_job_title">{{user.job.title}}</p>
+
+        <p id="user_info_job_experience" class="user_info_job user_info_job_experience">{{user.job.experience | experience}}</p>
+
+        <p id="user_info_job_location" class="user_info_job user_info_job_location">{{user.job.location}}</p>
+      </div>
+
+      <div class="details-footer">
+        <p id="user_info_email" class="user_info user_info_email"><a ng-href="mailto:{{user.email}}"> <i class="fa fa-envelope"></i> {{user.email}}</a></p>
+
+        <p id="user_info_phone" class="user_info user_info_phone"><i class="fa fa-phone"></i> {{user.phone}}</p>
+      </div>
+    </div>
+  </div>
+</div>

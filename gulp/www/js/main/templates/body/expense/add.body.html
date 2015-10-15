@@ -1,0 +1,130 @@
+<div class="md-body-center  view-expense-add">
+
+  <md-content class="md-form md-whiteframe-z2">
+    <md-toolbar class="md-tall" layout="row" layout-align="start end">
+      <h2 class="md-toolbar-tools">
+        <span>Add Expense</span>
+      </h2>
+
+      <h3 class="md-toolbar-tools" layout="row" layout-align="end center">
+        <span>#{{expense.obj.expenseId}}</span>
+      </h3>
+    </md-toolbar>
+    <md-content layout-padding>
+      <form name="formExpenseAdd"  ng-submit="expense.submit()">
+        <div layout layout-sm="column">
+          <md-input-container flex>
+            <div class="view-scan-picture" style="background-image: url({{expense.obj.expense_p_img_justif.img}})"></div>
+          </md-input-container>
+
+          <md-input-container flex>
+
+            <div layout layout-sm="column">
+              <md-input-container flex>
+                <md-switch
+                ng-model="expense.obj.expenseReason"
+                aria-label="Dépense en île de France"
+                ng-true-value="'y'"
+                ng-false-value="'n'"
+                class="md-warn">
+                  <label>Dépense en île de France</label>
+              </md-input-container>
+            </div>
+
+            <div layout layout-sm="column">
+              <md-input-container flex>
+                <label>Date de début</label>
+                <input type="text" class="date" ng-model="expense.obj.expense_p_begin_date" value="{{expense.obj.expense_p_begin_date}}">
+              </md-input-container>
+            </div>
+
+            <div layout layout-sm="column">
+              <md-input-container flex>
+                <label>Date de fin</label>
+                <input type="text" class="date" ng-model="expense.obj.expense_p_end_date" value="{{expense.obj.expense_p_end_date}}">
+              </md-input-container>
+            </div>
+
+            <div layout layout-sm="column">
+              <md-input-container flex>
+                <label>Type</label>
+                <md-select ng-model="expense.obj.expense_p_expense_type">
+                  <md-option ng-repeat="type in main.constantExpenseReasonInIleDeFrance" value="{{type.code}}" ng-selected="type.code == 'TAXI'" >{{type.description}}
+                  </md-option>
+                </md-select>
+              </md-input-container>
+            </div>
+
+          </md-input-container>
+        </div>
+
+        <div layout layout-sm="column">
+          <md-input-container flex>
+            <label>Amount</label>
+            <input
+            type="number"
+            required
+            min="1"
+            max="9999"
+            ng-change="expense.getRatesBase()"
+            ng-model="expense.obj.expense_p_amount">
+          </md-input-container>
+
+          <md-input-container flex>
+            <label>Currency</label>
+            <md-select
+            required
+            ng-change="expense.getRatesBase()"
+            ng-model="expense.obj.expense_p_currency">
+              <md-option
+              ng-repeat="currency in main.constantGlobalCurrency"
+              ng-selected="currency.label == 'EUR'"
+              value="{{currency.label}}">{{currency.label}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container
+          flex
+          ng-if="expense.obj.expense_p_amount && expense.obj.expense_p_currency && (expense.obj.expense_p_currency != 'EUR') ">
+            <label>Change Rate</label>
+            <input ng-model="expense.obj.expenseChangeRate">
+          </md-input-container>
+
+          <md-input-container
+          flex
+          ng-if="expense.obj.expense_p_amount && expense.obj.expense_p_currency && (expense.obj.expense_p_currency != 'EUR') ">
+            <label>Amount Change €</label>
+            <input ng-model="expense.obj.expense_p_amountConverted">
+          </md-input-container>
+
+        </div>
+
+        <div layout layout-sm="column">
+          <md-input-container flex>
+            <label>Justification</label>
+            <textarea ng-model="expense.obj.expense_p_justification" columns="1" md-maxlength="250"></textarea>
+          </md-input-container>
+        </div>
+        <div layout="row" layout-align="end center">
+          <md-button
+          type="reset" ui-sref="main.home">Clear
+          </md-button>
+
+          <!--md-button
+          type="submit"
+          class="md-raised md-primary"
+          ng-disabled="formSignIn.$invalid">Save Draft
+          </md-button-->
+
+          <md-button
+          type="submit"
+          class="md-raised md-primary"
+          ng-disabled="formExpenseAdd.$invalid">Submit
+          </md-button>
+        </div>
+      </form>
+    </md-content>
+  </md-content>
+
+</div>
