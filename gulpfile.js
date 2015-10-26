@@ -1,182 +1,91 @@
 'use strict';
 
-(function () {
+// /////////////////////////////////////////////////////////////////
+// Required
+// /////////////////////////////////////////////////////////////////
+var gulp = require('gulp'),
+    uglify = require('gulp-uglify'),
+    rename = require('gulp-rename'),
+    less = require('gulp-less'),
+    del = require('del'),
+    concat = require('gulp-concat'),
+    gutil = require('gulp-util'),
+    CONFIG = require('./.gulpfilec');
 
-    /**
-     * Libs
-     **/
-    var gulp = require('gulp');
-    var replace = require('gulp-replace');
-    var gutil = require('gulp-util');
-    var less = require('gulp-less');
-    var connect = require('gulp-connect');
-    var open = require('gulp-open');
-    var inject = require('gulp-inject');
-    var bowerFiles = require('main-bower-files');
-    var series = require('stream-series');
-    var clean = require('gulp-clean');
+// /////////////////////////////////////////////////////////////////
+// Script Task
+// /////////////////////////////////////////////////////////////////
+var fnScript = function () {
+    gulp.src(CONFIG.PATH.src.js)
+        .pipe(rename({suffix: '.min'}))
+        .pipe(concat('script.js'))
+        .pipe(gulp.dest(CONFIG.PATH.dist.js))
+        .pipe(uglify())
+        .pipe(concat('script.min.js'))
+        .pipe(gulp.dest(CONFIG.PATH.dist.js));
+};
+gulp.task('scripts', fnScript());
 
-    var filter = require('gulp-filter');
-    var cssmin = require('gulp-minify-css');
-    var concat = require('gulp-concat');
-    var ngAnnotate = require('gulp-ng-annotate');
-    var uglify = require('gulp-uglify');
+// /////////////////////////////////////////////////////////////////
+// Less Task
+// /////////////////////////////////////////////////////////////////
+var fnLess = function () {
+    gulp.src(CONFIG.PATH.src.less)
+        .pipe(concat('style.less'))
+        .pipe(gulp.dest(CONFIG.PATH.dist.less))
+        .pipe(less())
+        .pipe(gulp.dest(CONFIG.PATH.dist.css))
+        .pipe(less({
+            compress: true
+        }))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(gulp.dest(CONFIG.PATH.dist.css));
+};
+gulp.task('less', fnLess());
 
-    /**
-     * Env
-     **/
-    var env = {
-        base: __dirname + '/web',
-        index: __dirname + '/web/index.html',
-        less: __dirname + '/web/less/style.less',
-        lesssources: __dirname + '/web/less/**/*.less',
-        css: __dirname + '/web/css',
-        stylesources: __dirname + '/web/css/**/*.css',
+// /////////////////////////////////////////////////////////////////
+// Build Task
+// /////////////////////////////////////////////////////////////////
 
-        mainapp: __dirname + '/web/js/app.js',
-        js: __dirname + '/web/js/**/*.js',
-        port: 9000,
-        dist: __dirname + '/dist'
-    };
-    var bowerOptions = {
-        base: __dirname + '/bower_components',
-        options: {
-            paths: {
-                bowerDirectory: 'bower_components',
-                bowerrc: '.bowerrc',
-                bowerJson: 'bower.json'
-            }
-        }
-    };
-
-
-    /******************************************************************************
-     * CLEAN
-     *******************************************************************************/
-    gulp.task('clean', function () {
-        return gulp.src(env.dist)
-            .pipe(clean());
-    });
-
-    /******************************************************************************
-     * BUILD
-     *******************************************************************************/
-    gulp.task('build', [
-        'less',
-        'copyFiles',
-        'uglify',
-        'cssmin'
-    ], build);
-
-    function build() {
-        var opt = {
-            ignorePath: 'dist',
-            addRootSlash: false
-        };
-        return gulp.src(env.index)
-            .pipe(replace(/<!-- (.*?):js -->([\S\s]*?)<!-- endinject -->/gmi, '<!-- $1:js -->\n<!-- endinject -->'))
-            .pipe(replace(/<!-- (.*?):css -->([\S\s]*?)<!-- endinject -->/gmi, '<!-- $1:css -->\n<!-- endinject -->'))
-            .pipe(inject(gulp.src(env.dist + '/min/*.min.css'), opt))
-            .pipe(inject(gulp.src(env.dist + '/min/*.min.js'), opt))
-            .pipe(gulp.dest(env.dist));
+var fnBuild = {
+    clean: function (cb) {
+        del(CONFIG.PATH.clean, cb);
+    },
+    export: function () {
+        // do async stuff
+        setTimeout(function () {
+            fnScript();
+            //gutil.log('Finished \'%s\'',gutil.colors.cyan('script'));
+            fnLess();
+            //gutil.log('Finished \'%s\'',gutil.colors.cyan('less'));
+        }, 1);
     }
+};
 
-
-    gulp.task('copyFiles', function () {
-        return gulp.src([
-            env.base + '/**/*.*',
-            '!**/*.{js,css,less}',
-            '!' + env.base + '/bower_components/**/*.*'
-        ], {base: env.base})
-            .pipe(gulp.dest(env.dist));
+// Clear out all files and folders from build folder
+gulp.task('build:clean', function (callback) {
+    del(CONFIG.PATH.clean).then(function () {
+        callback();
     });
+});
 
-    gulp.task('uglify', function () {
-        var files = bowerFiles(bowerOptions);
-        files.push(env.mainapp);
-        files.push(env.js);
+// Task to export src
+gulp.task('build:export', ['scripts', 'less']);
 
-        return gulp.src(files)
-            .pipe(filter('**/*.js'))
-            .pipe(concat('app.min.js'))
-            .pipe(ngAnnotate())
-            .pipe(uglify({mangle: false}))
-            .pipe(gulp.dest(env.dist + '/min'));
-    });
+// Task to creat build directory for all files
+gulp.task('build', ['build:clean'], function () {
+    fnBuild.export();
+});
 
-    gulp.task('cssmin', function () {
-        var files = bowerFiles(bowerOptions);
-        files.push(env.stylesources);
-        return gulp.src(files)
-            .pipe(filter('**/*.css'))
-            .pipe(concat('style.min.css'))
-            .pipe(cssmin())
-            .pipe(gulp.dest(env.dist + '/min/'));
-    });
+// /////////////////////////////////////////////////////////////////
+// Watch Task
+// /////////////////////////////////////////////////////////////////
+gulp.task('watch', function () {
+    gulp.watch(CONFIG.PATH.src.js, ['scripts']);
+    gulp.watch(CONFIG.PATH.src.less, ['less']);
+});
 
-    /******************************************************************************
-     * DEV
-     *******************************************************************************/
-    gulp.task('default', ['less', 'inject', 'connect', 'watches'], function () {
-        return gutil.log('!=== App running on localhost:' + env.port + ' ===!');
-    });
-
-    // less compile
-    gulp.task('less', function () {
-        return gulp.src(env.less)
-            .pipe(less())
-            .pipe(gulp.dest(env.css));
-    });
-
-
-    // connect local server
-    gulp.task('connect', function () {
-        connect.server({
-            port: env.port,
-            root: 'www',
-            livereload: true
-        });
-        return gulp.src(env.index)
-            .pipe(open('', {url: 'http://localhost:' + env.port}));
-    });
-
-    // reload app
-    gulp.task('reload', function () {
-        return gulp.src(env.index)
-            .pipe(connect.reload());
-    });
-
-    // inject files
-    gulp.task('inject', function () {
-        var vendor = gulp.src(bowerFiles(bowerOptions), {read: false});
-        var css = gulp.src(env.stylesources, {read: false});
-        var mainapp = gulp.src(env.mainapp);
-        var js = gulp.src([env.js, '!' + env.mainapp]);
-
-        var opt = {
-            ignorePath: 'www'
-        };
-        var bowerOpt = {
-            ignorePath: 'www',
-            name: 'bower'
-        };
-
-        return gulp.src(env.index)
-            .pipe(replace(/<!-- (.*?):js -->([\S\s]*?)<!-- endinject -->/gmi, '<!-- $1:js -->\n<!-- endinject -->'))
-            .pipe(replace(/<!-- (.*?):css -->([\S\s]*?)<!-- endinject -->/gmi, '<!-- $1:css -->\n<!-- endinject -->'))
-            .pipe(inject(vendor, bowerOpt))
-            .pipe(inject(css, opt))
-            .pipe(inject(series(mainapp, js), opt))
-            .pipe(gulp.dest('./web/'));
-
-    });
-
-    /**
-     * Watches
-     **/
-    gulp.task('watches', function () {
-        gulp.watch(env.lesssources, ['less', 'inject', 'reload']);
-        gulp.watch(env.js, ['inject', 'reload']);
-    });
-
-})();
+// /////////////////////////////////////////////////////////////////
+// Default Task
+// /////////////////////////////////////////////////////////////////
+gulp.task('default', ['build', 'watch']);
