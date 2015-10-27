@@ -5,8 +5,9 @@
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     {% block stylesheets %}
-        {# stylesheets '%kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less' '%kernel.root_dir%/../vendor/twitter/bootstrap/less/responsive.less' filter='lessphp,cssrewrite' output='css/app.css' #}
-        <!--link rel="stylesheet" href=""/--> {# endstylesheets #}  
+        {% stylesheets '%kernel.root_dir%/../web/dist/css/style.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
     {% endblock %}
 </head>
 <body>

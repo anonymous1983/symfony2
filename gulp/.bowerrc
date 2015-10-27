@@ -1,6 +1,0 @@
-{
-  "directory": "www/bower_components",
-  "proxy":"http://proxyweb:8080",
-  "https-proxy":"http://proxyweb:8080",
-  "strict-ssl": false
-}
