@@ -50,3 +50,9 @@ composer require twitter/bootstrap 3.3.5
 ### https://strongloop.com/strongblog/node-js-php-get-started/
 ### https://www.youtube.com/watch?v=TE0U1RbTf1A
 
+************************************************************************
+29/10/2015
+----------
+----------
+https://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2/securite-et-gestion-des-utilisateurs
+

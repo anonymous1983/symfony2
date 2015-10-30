@@ -1,0 +1,3 @@
+accounts_login:
+    path:     /login
+    defaults: { _controller: AccountsBundle:Login:index }

@@ -1,3 +1,7 @@
+accounts:
+    resource: "@AccountsBundle/Resources/config/routing.yml"
+    prefix:   /accounts
+
 aa_platform:
     resource: "@AAPlatformBundle/Resources/config/routing.yml"
     prefix:   /platform
