@@ -29,10 +29,10 @@ security:
             provider:  in_memory
             form_login:
                 login_path: accounts/login
-                check_path: accounts/login_check
+                check_path: login_check
             logout:
                 path:   accounts/logout
-                target: /platform
+                target: platform/advert/all
             # activate different ways to authenticate
 
             # http_basic: ~
