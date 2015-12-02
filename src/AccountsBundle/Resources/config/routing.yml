@@ -1,9 +1,0 @@
-accounts_login:
-    path:     /login
-    defaults: { _controller: AccountsBundle:Login:login }
-
-accounts_login_check:
-    pattern: /login_check
-
-accounts_logout:
-    pattern: /logout
