@@ -1,3 +1,9 @@
 aa_platform:
     resource: "@AAPlatformBundle/Resources/config/routing.yml"
     prefix:   /platform
+
+#REST 
+rest : 
+    type : rest 
+    resource : "@AAPlatformBundle/Resources/config/routing_rest.yml"
+    prefix : /api
