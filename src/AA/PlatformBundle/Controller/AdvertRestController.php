@@ -11,7 +11,7 @@ use AA\PlatformBundle\Entity\Advert;
 
 class AdvertRestController extends Controller
 {
-    public function getAdvertAllAction()
+    public function getAdvertsAction()
     {
        $adverts = $this->getDoctrine()
             ->getRepository("AAPlatformBundle:Advert")
