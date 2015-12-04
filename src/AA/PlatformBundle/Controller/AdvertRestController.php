@@ -31,11 +31,14 @@ class AdvertRestController extends Controller
         return $advert;
     }
 
-    public function postAdvertAction(Request $Request)
+    public function postAdvertAction(Request $request)
     {
+        
+
         $advert = new Advert();
         $form = $this->createForm(new AdvertType(), $advert);
         $form->bind($request);
+        
 
         return $form;
 
@@ -62,3 +65,15 @@ class AdvertRestController extends Controller
 
 
 }
+
+
+/*
+{
+      "id":1,
+      "titre":"Mercedes classe c garantie 2017",
+      "description":"test test test",
+      "url":"a036940c7fa53e0b8ba988baf2f9836a192fc3c1.jpg",
+      "date":"2015-10-14 15:02:08",
+      "status":null
+}
+*/

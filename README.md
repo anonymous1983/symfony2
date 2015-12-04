@@ -63,3 +63,15 @@ the following (in the given order) to determine the serializer to use:
 - The [`Symfony Serializer`](http://symfony.com/doc/current/cookbook/serializer.html) if it's enabled (or any service called ``serializer``).
 
 That was it!
+
+
+For post REST dont forget to set the 'csrf_protection' to false false in your form type :
+```
+public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class'        => 'Acme\DemoBundle\Model\User',
+            'csrf_protection'   => false,
+        ));
+    }
+```    

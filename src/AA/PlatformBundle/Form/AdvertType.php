@@ -29,7 +29,8 @@ class AdvertType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AA\PlatformBundle\Entity\Advert'
+            'data_class' => 'AA\PlatformBundle\Entity\Advert',
+            'csrf_protection'   => false
         ));
     }
 
