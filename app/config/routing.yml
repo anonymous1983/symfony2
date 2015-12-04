@@ -5,5 +5,5 @@ aa_platform:
 #REST 
 rest : 
     type : rest 
-    resource : "@AAPlatformBundle/Resources/config/routing_rest.yml"
-    prefix : /api
+    resource : "@AAPlatformBundle/Resources/config/routing_rest_v1.yml"
+    prefix : /api/v1
