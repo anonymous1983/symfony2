@@ -3,7 +3,7 @@
 * Version : 2.7.*
 
 
-API REST:
+API REST
 -----------------
 ### Bundles
 - [FOSRestBundle v1.7](https://github.com/FriendsOfSymfony/FOSRestBundle/tree/1.7)
