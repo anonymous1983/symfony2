@@ -16,8 +16,8 @@ API REST
 #### Settin up the FOSRestBundle Bundle [src](http://symfony.com/doc/master/bundles/FOSRestBundle/1-setting_up_the_bundle.html)
 
 
-A) Download the Bundle
-----------------------
+##### A) Download the Bundle
+----------------------------
 
 Open a command console, enter your project directory and execute the
 following command to download the latest stable version of this bundle:
@@ -29,7 +29,7 @@ following command to download the latest stable version of this bundle:
 This command requires you to have Composer installed globally, as explained
 in the `installation chapter`_ of the Composer documentation.
 
-B) Enable the Bundle
+##### B) Enable the Bundle
 --------------------
 
 Then, enable the bundle by adding the following line in the ``app/AppKernel.php``
@@ -51,7 +51,7 @@ file of your project:
         }
     }
 
-C) Enable a Serializer
+##### C) Enable a Serializer
 ----------------------
 
 This bundle needs a serializer to work correctly. In most cases,
