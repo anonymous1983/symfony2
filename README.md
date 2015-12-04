@@ -5,11 +5,14 @@
 
 API REST
 -----------------
+
 ### Bundles
 - [FOSRestBundle v1.7](https://github.com/FriendsOfSymfony/FOSRestBundle/tree/1.7)
 - [JMSSerializerBundle](https://github.com/schmittjoh/JMSSerializerBundle/tree/1.1.0)
+
 ### Articles
 - [Symfony2 & Rest with FOSRestBundle](http://npmasters.com/2012/11/25/Symfony2-Rest-FOSRestBundle.html)
+
 #### Settin up the FOSRestBundle Bundle [src](http://symfony.com/doc/master/bundles/FOSRestBundle/1-setting_up_the_bundle.html)
 
 
