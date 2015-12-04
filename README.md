@@ -63,3 +63,9 @@ the following (in the given order) to determine the serializer to use:
 - The `Symfony Serializer`_ if it's enabled (or any service called ``serializer``).
 
 That was it!
+
+
+.. _`installation chapter`: https://getcomposer.org/doc/00-intro.md
+.. _`JMSSerializer`: https://github.com/schmittjoh/serializer
+.. _`JMSSerializerBundle`: https://github.com/schmittjoh/JMSSerializerBundle
+.. _`Symfony Serializer`: http://symfony.com/doc/current/cookbook/serializer.html
