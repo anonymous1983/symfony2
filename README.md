@@ -68,10 +68,10 @@ That was it!
 For post REST dont forget to set the 'csrf_protection' to false false in your form type :
 ```
 public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class'        => 'Acme\DemoBundle\Model\User',
-            'csrf_protection'   => false,
-        ));
-    }
+{
+    $resolver->setDefaults(array(
+        'data_class'        => 'Acme\DemoBundle\Model\User',
+        'csrf_protection'   => false,
+    ));
+}
 ```    
