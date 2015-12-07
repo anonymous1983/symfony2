@@ -34,30 +34,20 @@ class AdvertRestController extends Controller
     public function postAdvertAction(Request $request)
     {
         
+        $entity = $this->getDoctrine()->getManager();
 
         $advert = new Advert();
-        $form = $this->createForm(new AdvertType(), $advert);
-        $form->bind($request);
+        $advert->setTitre($request->get('titre'))
+            ->setDescription($request->get('description'))
+            ->setUrl($request->get('url'))
+            ->setDate(new \DateTime($request->get('date')));
 
-/*        if ($form->isValid()) {
+        $entity->persist($advert);
+        $entity->flush();
 
-            
-            $entity = $this->getDoctrine()->getManager();
-            $entity->persist($advert);
-            $entity->flush();
-
-            return $this->redirectView(
-                    $this->generateUrl(
-                        'get_organisation',
-                        array('id' => $advert->getId())
-                        ),
-                    Codes::HTTP_CREATED
+       return $this->redirectToRoute('api_get_advert',
+                    array('id' => $advert->getId())
                     );
-        }*/
-        
-
-        return $form;
-
     }
 
 
