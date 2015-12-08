@@ -27,14 +27,14 @@ class AdvertRestController extends Controller
      *  },
      *  tags={
      *    "stable" = "#5e8014"
-     *  }     
+     *  }
      * )
      */
     public function getAdvertsAction()
     {
        $adverts = $this->getDoctrine()
             ->getRepository("AAPlatformBundle:Advert")
-            ->findAll();
+            ->findBy(array(), array(), 2, 5);
 
         return $adverts;
     }
@@ -45,8 +45,8 @@ class AdvertRestController extends Controller
      *  resource=true,
      *  description="Get Advert by id",
      *  statusCodes={
-     *    200="Ok : Returned when successful",
-     *    204="No Content : Returned when successful but recording is not found"
+     *    200="Ok : Request succeeded. Response included",
+     *    204="No Content : Request succeeded, but no response body"
      *  },
      *  tags={
      *    "stable" = "#5e8014"
@@ -148,4 +148,8 @@ http://obtao.com/blog/2013/12/creer-une-api-rest-dans-une-application-symfony/
 Documentation :
 https://github.com/nelmio/NelmioApiDocBundle/blob/master/Resources/doc/the-apidoc-annotation.md
 http://swagger.io/
+
+http://afsy.fr/avent/2013/06-best-practices-pour-vos-apis-rest-http-avec-symfony2
+
+https://github.com/marmelab/ng-admin
 */
