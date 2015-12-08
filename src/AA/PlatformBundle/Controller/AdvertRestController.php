@@ -22,13 +22,12 @@ class AdvertRestController extends Controller
      *  resource=true,
      *  description="Get All Adverts",
      *  statusCodes={
-     *         200="Returned when successful",
-     *         403="Returned when the user is not authorized to say hello",
-     *         404={
-     *           "Returned when the user is not found",
-     *           "Returned when something else is not found"
-     *         }
-     *     }
+     *    200="Ok : Returned when successful",
+     *    204="No Content : Returned when successful but no data"
+     *  },
+     *  tags={
+     *    "stable" = "#5e8014"
+     *  }     
      * )
      */
     public function getAdvertsAction()
@@ -49,6 +48,9 @@ class AdvertRestController extends Controller
      *    200="Ok : Returned when successful",
      *    204="No Content : Returned when successful but recording is not found"
      *  },
+     *  tags={
+     *    "stable" = "#5e8014"
+     *  },
      *  requirements={
      *    {
      *      "name"="id",
@@ -67,17 +69,43 @@ class AdvertRestController extends Controller
      */
     public function getAdvertAction($id)
     {
-        
-        $advert = $this->getDoctrine()
-            ->getRepository("AAPlatformBundle:Advert")
-            ->find($id);
-        if (!$advert) {
-            throw new HttpException(204, "No Advert found for id ".$id);
+        if(is_numeric($id)){
+            $advert = $this->getDoctrine()
+                ->getRepository("AAPlatformBundle:Advert")
+                ->find($id);
+            if (!$advert) {
+                throw new HttpException(204, "No Advert found for id ".$id);
+            }
+
+            return $advert;            
+        }else{
+            throw new HttpException(400, "The id must be integer") ;
+            return "";
         }
-        
-        return $advert;
        
     }
+
+    /**
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Add new advert",
+     *  statusCodes={
+     *    200="Ok : Returned when successful",
+     *  },
+     *  requirements={
+     *    {
+     *      "name"="request",
+     *      "dataType"="Json",
+     *      "requirement"="\d+",
+     *      "description"="Advert Object"
+     *    }
+     *  },
+     *  tags={
+     *    "stable" = "#5e8014"
+     *  }
+     * )
+     */
 
     public function postAdvertAction(Request $request)
     {
