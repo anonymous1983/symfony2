@@ -7,3 +7,8 @@ rest :
     type : rest 
     resource : "@AAPlatformBundle/Resources/config/routing_rest_v1.yml"
     prefix : /api/v1
+
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/v1/doc

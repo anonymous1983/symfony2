@@ -3,7 +3,6 @@
 namespace AA\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Advert
  *
