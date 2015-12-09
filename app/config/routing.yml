@@ -2,8 +2,7 @@ aa_platform:
     resource: "@AAPlatformBundle/Resources/config/routing.yml"
     prefix:   /platform
 
-#REST 
-rest : 
+rest :
     type : rest 
     resource : "@AAPlatformBundle/Resources/config/routing_rest_v1.yml"
     prefix : /api/v1
@@ -12,3 +11,7 @@ rest :
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/v1/doc
+
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

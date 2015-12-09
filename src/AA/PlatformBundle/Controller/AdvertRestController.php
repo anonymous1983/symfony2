@@ -189,4 +189,12 @@ Symfony HTTP Code :
 FosRESTBundle view header :
 http://symfony.com/doc/current/bundles/FOSRestBundle/2-the-view-layer.html
 
+
+Authentication  WSSE / Salt :
+
+http://obtao.com/blog/2014/02/configurer-wsse-sur-symfony-avec-le-fosrestbundle/
+
+
+FosUserBundle :
+http://www.grafikart.fr/tutoriels/symfony/gestion-user-fosuserbundle-383
 */

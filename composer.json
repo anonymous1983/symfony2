@@ -22,7 +22,8 @@
         "leafo/lessphp": "dev-master",
         "friendsofsymfony/rest-bundle": "^1.7",
         "nelmio/cors-bundle": "^1.4",
-        "nelmio/api-doc-bundle": "^2.11"        
+        "nelmio/api-doc-bundle": "^2.11",
+        "friendsofsymfony/user-bundle": "~2.0@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
