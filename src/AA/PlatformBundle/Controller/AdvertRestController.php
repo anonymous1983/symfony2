@@ -5,15 +5,14 @@ namespace AA\PlatformBundle\Controller;
 use FOS\RestBundle\Controller\Annotations\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use AA\PlatformBundle\Entity\Advert;
 use AA\PlatformBundle\Form\AdvertType;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use FOS\RestBundle\Controller\FOSRestController;
 
-// use Symfony\component\HttpFoundation\JsonResponse;
-
-
-class AdvertRestController extends Controller
+class AdvertRestController extends FOSRestController
 {
 
     /**
@@ -22,21 +21,51 @@ class AdvertRestController extends Controller
      *  resource=true,
      *  description="Get All Adverts",
      *  statusCodes={
-     *    200="Ok : Returned when successful",
-     *    204="No Content : Returned when successful but no data"
+     *    200="HTTP_OK : Returned when successful",
+     *    204="HTTP_NO_CONTENT : Returned when successful but no data",
+     *    206="HTTP_PARTIAL_CONTENT : Return when successful but it's the last recordings"
      *  },
      *  tags={
      *    "stable" = "#5e8014"
+     *  },
+     *  parameters={
+     *    {
+     *      "name": "limit",
+     *      "dataType": "Integer",
+     *      "required": "False",
+     *      "description": "The number of results returned",
+     *    },
+     *    {
+     *      "name": "offset",
+     *      "dataType": "Integer",
+     *      "required": "False",
+     *      "description": "Number start on record"
+     *    }
      *  }
      * )
+     * @param Request $request
+     * @return array
      */
-    public function getAdvertsAction()
+    public function getAdvertsAction(Request $request)
     {
-       $adverts = $this->getDoctrine()
-            ->getRepository("AAPlatformBundle:Advert")
-            ->findBy(array(), array(), 2, 5);
+        // Set limit | default = 5
+        $limit = $request->get('limit') ? $request->get('limit') : 5;
+        // Set offset | default = 0
+        $offset = $request->get('offset') ? $request->get('offset') : 0;
 
-        return $adverts;
+        $adverts = $this->getDoctrine()
+            ->getRepository("AAPlatformBundle:Advert")
+            ->findBy(array(), array(), $limit, $offset);
+        // 206 :: HTTP_PARTIAL_CONTENT
+        if (0 < count($adverts) && count($adverts) < $limit) {
+            return  $this->view($adverts, Response::HTTP_PARTIAL_CONTENT);
+        }
+        // 204 :: HTTP_NO_CONTENT
+        if (!$adverts) {
+            return  $this->view($adverts, Response::HTTP_NO_CONTENT);
+        }
+        // 202 :: HTTP_OK
+        return  $this->view($adverts, Response::HTTP_OK);
     }
 
     /**
@@ -59,7 +88,7 @@ class AdvertRestController extends Controller
      *      "description"="Id of advert"
      *    },
      *    {
-     *      "name"="_format", 
+     *      "name"="_format",
      *      "dataType"="String",
      *      "requirement"="xml|json|html",
      *      "description"="Request format"
@@ -69,20 +98,20 @@ class AdvertRestController extends Controller
      */
     public function getAdvertAction($id)
     {
-        if(is_numeric($id)){
+        if (is_numeric($id)) {
             $advert = $this->getDoctrine()
                 ->getRepository("AAPlatformBundle:Advert")
                 ->find($id);
             if (!$advert) {
-                throw new HttpException(204, "No Advert found for id ".$id);
+                throw new HttpException(204, "No Advert found for id " . $id);
             }
 
-            return $advert;            
-        }else{
-            throw new HttpException(400, "The id must be integer") ;
+            return $advert;
+        } else {
+            throw new HttpException(400, "The id must be integer");
             return "";
         }
-       
+
     }
 
     /**
@@ -109,7 +138,7 @@ class AdvertRestController extends Controller
 
     public function postAdvertAction(Request $request)
     {
-        
+
         $entity = $this->getDoctrine()->getManager();
 
         $advert = new Advert();
@@ -121,9 +150,9 @@ class AdvertRestController extends Controller
         $entity->persist($advert);
         $entity->flush();
 
-       return $this->redirectToRoute('api_get_advert',
-                    array('id' => $advert->getId())
-                    );
+        return $this->redirectToRoute('api_get_advert',
+            array('id' => $advert->getId())
+        );
     }
 
 
@@ -152,4 +181,12 @@ http://swagger.io/
 http://afsy.fr/avent/2013/06-best-practices-pour-vos-apis-rest-http-avec-symfony2
 
 https://github.com/marmelab/ng-admin
+
+Symfony HTTP Code :
+- http://api.symfony.com/2.7/Symfony/Component/HttpFoundation/Response.html
+- https://fr.wikipedia.org/wiki/Liste_des_codes_HTTP
+
+FosRESTBundle view header :
+http://symfony.com/doc/current/bundles/FOSRestBundle/2-the-view-layer.html
+
 */
