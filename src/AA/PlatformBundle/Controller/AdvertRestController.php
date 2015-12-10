@@ -205,4 +205,18 @@ http://www.grafikart.fr/tutoriels/symfony/gestion-user-fosuserbundle-383
 
 Bien utiliser les commandes console de Symfony2
 http://blog.keiruaprod.fr/2012/03/21/bien-utiliser-les-commandes-console-de-symfony2/
+
+
+to creat user
+`php app/console fos:user:create admin admin@symfony.com admin`
+`php app/console fos:user:active admin`
+`php ^pp/console fos:user:promote admin ROLE_ADMIN`
+
+to creat new entity comment
+`php app/console doctrine:generate:entity`
+`php app/console doctrine:schema:update --force`
+`php app/console generate:doctrine:crud AAPlatformBundle:Comment`
+
+
+
 */
