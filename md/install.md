@@ -9,6 +9,9 @@ Configuration & install
 `git clone https://github.com/anonymous1983/symfony2.git`
 
 ### Install
+
+**Symfony**
+
 - First you need to check out the symfony2 application folder
 
 `cd symfony2`
@@ -20,6 +23,8 @@ Execute the install Composer command to download and install all the dependencie
 `composer install`
 
 or `composer update`
+
+**DataBase**
 
 - Configuring the Database
 
@@ -49,3 +54,5 @@ php bin/console doctrine:database:create
 - Creating an Entity Class
 
 `php bin/console doctrine:generate:entity`
+
+**Node.js**
