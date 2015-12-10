@@ -12,7 +12,7 @@ use AA\PlatformBundle\Form\AdvertType;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\FOSRestController;
 
-class AdvertRestController extends FOSRestController
+class CommentRestController extends FOSRestController
 {
 
     /**
@@ -158,7 +158,7 @@ class AdvertRestController extends FOSRestController
 
     public function commentAdvertAction($id)
     {
-
+        
     }
 
 
@@ -202,7 +202,4 @@ http://obtao.com/blog/2014/02/configurer-wsse-sur-symfony-avec-le-fosrestbundle/
 
 FosUserBundle :
 http://www.grafikart.fr/tutoriels/symfony/gestion-user-fosuserbundle-383
-
-Bien utiliser les commandes console de Symfony2
-http://blog.keiruaprod.fr/2012/03/21/bien-utiliser-les-commandes-console-de-symfony2/
 */
