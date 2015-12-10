@@ -56,3 +56,5 @@ php bin/console doctrine:database:create
 `php bin/console doctrine:generate:entity`
 
 **Node.js**
+
+`npm install`
