@@ -1,8 +1,9 @@
-# symfony2
+Tuto Symfony2 + Api REST + Gulp + AngularJS
+===========================================
 
-|            |             |
-| ---------- | ----------- |
-| Version :  | 2.7.*       |
-
+| Tech.                   | Version     |
+| ----------------------- | ----------- |
+| Symfony2                | 2.7.*       |
+| AngularJS               | 1.4.*       |
 
 + [Api REST](md/api_rest.md)
