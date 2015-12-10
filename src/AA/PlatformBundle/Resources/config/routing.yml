@@ -1,3 +1,7 @@
+aa_platform_comment:
+    resource: "@AAPlatformBundle/Resources/config/routing/comment.yml"
+    prefix:   /comment
+
 aa_platform_home:
     path:      /{page}
     defaults:  { _controller: AAPlatformBundle:Advert:index, page: 1 }

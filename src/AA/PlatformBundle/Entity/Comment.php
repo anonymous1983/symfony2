@@ -22,33 +22,38 @@ class Comment
 
     /**
      * @var integer
+     * @ORM\Column(name="id_relation", type="integer", nullable=false, length=10)
      *
-     * @ORM\OneToOne(targetEntity="AA\PlatformBundle\Entity\Advert", cascade={"persist"})
      */
     private $idRelation;
 
     /**
      * @var integer
+     * @ORM\Column(name="id_user", type="integer", nullable=false, length=10)
      */
     private $idUser;
 
     /**
      * @var string
+     * @ORM\Column(name="comment", type="text", nullable=true, options={"default" = ""})
      */
     private $comment;
 
     /**
      * @var \DateTime
+     * @ORM\Column(name="date", type="datetime", nullable=true)
      */
     private $date;
 
     /**
      * @var integer
+     * @ORM\Column(name="active", type="integer", nullable=true, options={"default" = 0})
      */
     private $active;
 
     /**
      * @var integer
+     * @ORM\Column(name="archive", type="integer", nullable=true, options={"default" = 0})
      */
     private $archive;
 
