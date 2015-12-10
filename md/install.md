@@ -36,5 +36,10 @@ parameters:
 
 One mistake even seasoned developers make when starting a Symfony project is forgetting to set up default charset and collation on their database, ending up with latin type collations, which are default for most databases. They might even remember to do it the very first time, but forget that it's all gone after running a relatively common command during development:
 
-`php bin/console doctrine:database:drop --force`
-`php bin/console doctrine:database:create`
+```
+php bin/console doctrine:database:drop --force
+php bin/console doctrine:database:create
+```
+
+- Creating an Entity Class
+`php bin/console doctrine:generate:entity`
