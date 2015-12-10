@@ -8,7 +8,8 @@ var PORT = argv['port'] || 5555;
 var LIVE_RELOAD_PORT = argv['reload-port'] || 4002;
 var APP_BASE = argv['base'] || '/';
 
-var APP_SRC = 'src/AA';
+var APP_SRC = 'app/Resources';
+var SRC = 'src';
 var APP_DIST = 'web/dist';
 
 var PATH = {
@@ -23,10 +24,12 @@ var PATH = {
     src: {
         all: APP_SRC,
         js: [
-            APP_SRC + '/**/*.js'
+            APP_SRC + '/**/*.js',
+            SRC + '/**/*.js'
         ],
         less: [
-            APP_SRC + '/**/*.less'
+            APP_SRC + '/**/*.less',
+            SRC + '/**/*.less'
         ],
         sass: [
             APP_SRC + '/**/*.sass'
@@ -36,10 +39,16 @@ var PATH = {
             APP_SRC + '/**/*.jpeg',
             APP_SRC + '/**/*.jpg',
             APP_SRC + '/**/*.gif'
+        ],
+        watch: [
+            APP_SRC + '/**/*.js',
+            SRC + '/**/*.js',
+            APP_SRC + '/**/*.less',
+            SRC + '/**/*.less'
         ]
     },
     clean:[
-        APP_DIST + '/**'
+        APP_DIST
     ]
 };
 
@@ -48,6 +57,7 @@ var CONFIG = {
     LIVE_RELOAD_PORT: LIVE_RELOAD_PORT,
     APP_BASE: APP_BASE,
     APP_SRC: APP_SRC,
+    SRC: SRC,
     APP_DIST: APP_DIST,
     PATH: PATH
 };

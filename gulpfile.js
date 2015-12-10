@@ -81,8 +81,10 @@ gulp.task('build', ['build:clean'], function () {
 // Watch Task
 // /////////////////////////////////////////////////////////////////
 gulp.task('watch', function () {
-    gulp.watch(CONFIG.PATH.src.js, ['scripts']);
-    gulp.watch(CONFIG.PATH.src.less, ['less']);
+    //gulp.watch(CONFIG.PATH.src.js, ['scripts']);
+    //gulp.watch(CONFIG.PATH.src.less, ['less']);
+    //@ bug symfony cache ::
+    gulp.watch(CONFIG.PATH.src.watch, ['build']);
 });
 
 // /////////////////////////////////////////////////////////////////
