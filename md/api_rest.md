@@ -71,3 +71,92 @@ public function setDefaultOptions(OptionsResolverInterface $resolver)
     ));
 }
 ```    
+
+
+##### d) Exemple to Action in Rest Controller
+
+```
+<?php
+
+namespace [NameOfYourSpace]\[NameOfYourBundle]Bundle\Controller;
+
+use FOS\RestBundle\Controller\Annotations\View;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use AA\PlatformBundle\Entity\[YourEntity];
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use FOS\RestBundle\Controller\FOSRestController;
+
+class [NameOfYourController]Controller extends FOSRestController
+{
+
+   ...
+
+    /**
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get comments for Posts",
+     *  statusCodes={
+     *    200="HTTP_OK : Returned when successful",
+     *    204="HTTP_NO_CONTENT : Returned when successful but no data",
+     *    206="HTTP_PARTIAL_CONTENT : Return when successful but it's the last recordings",
+     *    400="HTTP_BAD_REQUEST : Problem with your input"
+     *  },
+     *  requirements={
+     *    {
+     *      "name"="id",
+     *      "dataType"="Integer",
+     *      "requirement"="\d+",
+     *      "description"="Id of Posts"
+     *    }
+     *  },
+     *  tags={
+     *    "Entity" = "[Posts, Comments]"
+     *    "stable" = "#5e8014"
+     *  }
+     * )
+     */
+    public function getCommentsAdvertAction(Request $request, $id)
+    {
+
+        // Set limit | default = 5
+        $limit = $request->get('limit') ? $request->get('limit') : 5;
+        // Set offset | default = 0
+        $offset = $request->get('offset') ? $request->get('offset') : 0;
+
+        if (is_numeric($id)) {
+
+            $comments = $this->getDoctrine()
+                ->getRepository("[NameSpace][NameBundle]Bundle:Comment")
+                ->findBy(
+                        array('idRelation' => $id), 
+                        array(), 
+                        $limit, 
+                        $offset
+                    );
+            // 206 :: HTTP_PARTIAL_CONTENT
+            if (0 < count($comments) && count($comments) < $limit) {
+                return  $this->view($comments, Response::HTTP_PARTIAL_CONTENT);
+            }
+            // 204 :: HTTP_NO_CONTENT
+            if (!$comments) {
+                return  $this->view($comments, Response::HTTP_NO_CONTENT);
+            }
+            // 200 :: HTTP_OK
+            return  $this->view($comments, Response::HTTP_OK);
+
+        } else {
+            // 400 :: HTTP_BAD_REQUEST
+            return  $this->view(null, Response::HTTP_BAD_REQUEST);
+        }
+
+    }
+    
+    ...
+
+
+}
+```
