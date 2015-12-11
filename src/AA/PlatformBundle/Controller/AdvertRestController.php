@@ -55,7 +55,12 @@ class AdvertRestController extends FOSRestController
 
         $adverts = $this->getDoctrine()
             ->getRepository("AAPlatformBundle:Advert")
-            ->findBy(array(), array(), $limit, $offset);
+            ->findBy(
+                    array(), 
+                    array(), 
+                    $limit, 
+                    $offset
+                );
         // 206 :: HTTP_PARTIAL_CONTENT
         if (0 < count($adverts) && count($adverts) < $limit) {
             return  $this->view($adverts, Response::HTTP_PARTIAL_CONTENT);
@@ -155,9 +160,63 @@ class AdvertRestController extends FOSRestController
         );
     }
 
-
-    public function commentAdvertAction($id)
+    /**
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get comments for Advert",
+     *  statusCodes={
+     *    200="Ok : Returned when successful",
+     *  },
+     *  requirements={
+     *    {
+     *      "name"="id",
+     *      "dataType"="Integer",
+     *      "requirement"="\d+",
+     *      "description"="Id of advert"
+     *    }
+     *  },
+     *  tags={
+     *    "Alpha" = "#ff0000"
+     *  }
+     * )
+     */
+    public function getCommentsAdvertAction(Request $request, $id)
     {
+
+         // Set limit | default = 5
+        $limit = $request->get('limit') ? $request->get('limit') : 5;
+        // Set offset | default = 0
+        $offset = $request->get('offset') ? $request->get('offset') : 0;
+
+        if (is_numeric($id)) {
+
+            $comments = $this->getDoctrine()
+                ->getRepository("AAPlatformBundle:Comment")
+                ->findBy(
+                        array('idRelation' => $id), 
+                        array(), 
+                        $limit, 
+                        $offset
+                    );
+            // 206 :: HTTP_PARTIAL_CONTENT
+            if (0 < count($comments) && count($comments) < $limit) {
+                return  $this->view($comments, Response::HTTP_PARTIAL_CONTENT);
+            }
+            // 204 :: HTTP_NO_CONTENT
+            if (!$comments) {
+                return  $this->view($comments, Response::HTTP_NO_CONTENT);
+            }
+            // 202 :: HTTP_OK
+            return  $this->view($comments, Response::HTTP_OK);
+
+        } else {
+
+            throw new HttpException(400, "The id must be integer");
+            return "";
+
+        } 
+
 
     }
 
@@ -198,6 +257,9 @@ http://symfony.com/doc/current/bundles/FOSRestBundle/2-the-view-layer.html
 
 Authentication  WSSE / Salt :
 http://obtao.com/blog/2014/02/configurer-wsse-sur-symfony-avec-le-fosrestbundle/
+
+Authentication  OAuth2 :
+https://github.com/FriendsOfSymfony/FOSOAuthServerBundle
 
 
 FosUserBundle :
