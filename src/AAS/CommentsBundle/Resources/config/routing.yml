@@ -1,0 +1,3 @@
+aas_comments_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AASCommentsBundle:Default:index }

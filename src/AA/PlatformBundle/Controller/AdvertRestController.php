@@ -272,6 +272,17 @@ Bien utiliser les commandes console de Symfony2
 http://blog.keiruaprod.fr/2012/03/21/bien-utiliser-les-commandes-console-de-symfony2/
 
 
+Creat Bundle (Application-specific bundles / Reusable bundles):
+http://symfony.com/doc/current/cookbook/bundles/best_practices.html
+
+Nomage Best Practice :
+http://www.php-fig.org/psr/psr-4/
+
+
+http://welcometothebundle.com/speedup-symfony-functional-tests-phpunit/
+
+
+
 to creat user
 `php app/console fos:user:create admin admin@symfony.com admin`
 `php app/console fos:user:active admin`
