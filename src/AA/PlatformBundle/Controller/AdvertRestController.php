@@ -79,8 +79,9 @@ class AdvertRestController extends FOSRestController
      *  resource=true,
      *  description="Get Advert by id",
      *  statusCodes={
-     *    200="Ok : Request succeeded. Response included",
-     *    204="No Content : Request succeeded, but no response body"
+     *    200="HTTP_OK : Returned when successful",
+     *    204="HTTP_NO_CONTENT : Returned when successful but no data",
+     *    206="HTTP_PARTIAL_CONTENT : Return when successful but it's the last recordings"
      *  },
      *  tags={
      *    "stable" = "#5e8014"
@@ -108,13 +109,16 @@ class AdvertRestController extends FOSRestController
                 ->getRepository("AAPlatformBundle:Advert")
                 ->find($id);
             if (!$advert) {
-                throw new HttpException(204, "No Advert found for id " . $id);
+                // 204 :: HTTP_NO_CONTENT
+                return  $this->view(null, Response::HTTP_NO_CONTENT);
             }
 
-            return $advert;
+            // 200 :: HTTP_OK
+            return  $this->view($advert, Response::HTTP_OK);
         } else {
-            throw new HttpException(400, "The id must be integer");
-            return "";
+
+            // 400 :: HTTP_BAD_REQUEST
+            return  $this->view(null, Response::HTTP_BAD_REQUEST);
         }
 
     }
@@ -166,7 +170,10 @@ class AdvertRestController extends FOSRestController
      *  resource=true,
      *  description="Get comments for Advert",
      *  statusCodes={
-     *    200="Ok : Returned when successful",
+     *    200="HTTP_OK : Returned when successful",
+     *    204="HTTP_NO_CONTENT : Returned when successful but no data",
+     *    206="HTTP_PARTIAL_CONTENT : Return when successful but it's the last recordings"
+     *    400="HTTP_BAD_REQUEST : Problem with your input"
      *  },
      *  requirements={
      *    {
@@ -207,16 +214,13 @@ class AdvertRestController extends FOSRestController
             if (!$comments) {
                 return  $this->view($comments, Response::HTTP_NO_CONTENT);
             }
-            // 202 :: HTTP_OK
+            // 200 :: HTTP_OK
             return  $this->view($comments, Response::HTTP_OK);
 
         } else {
-
-            throw new HttpException(400, "The id must be integer");
-            return "";
-
-        } 
-
+            // 400 :: HTTP_BAD_REQUEST
+            return  $this->view(null, Response::HTTP_BAD_REQUEST);
+        }
 
     }
 
