@@ -84,7 +84,6 @@ use FOS\RestBundle\Controller\Annotations\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use AA\PlatformBundle\Entity\[YourEntity];
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -114,7 +113,7 @@ class [NameOfYourController]Controller extends FOSRestController
      *    }
      *  },
      *  tags={
-     *    "Entity" = "[Posts, Comments]"
+     *    "Entity" = "[Posts, Comments]",
      *    "stable" = "#5e8014"
      *  }
      * )
