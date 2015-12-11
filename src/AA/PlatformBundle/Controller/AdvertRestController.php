@@ -6,9 +6,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use AA\PlatformBundle\Entity\Advert;
-use AA\PlatformBundle\Form\AdvertType;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\FOSRestController;
 
@@ -113,7 +111,7 @@ class AdvertRestController extends FOSRestController
                 return  $this->view(null, Response::HTTP_NO_CONTENT);
             }
 
-            // 200 :: HTTP_OK
+            // 202 :: HTTP_OK
             return  $this->view($advert, Response::HTTP_OK);
         } else {
 
@@ -129,7 +127,7 @@ class AdvertRestController extends FOSRestController
      *  resource=true,
      *  description="Add new advert",
      *  statusCodes={
-     *    200="Ok : Returned when successful",
+     *    200="Ok : Returned when successful"
      *  },
      *  requirements={
      *    {
@@ -172,7 +170,7 @@ class AdvertRestController extends FOSRestController
      *  statusCodes={
      *    200="HTTP_OK : Returned when successful",
      *    204="HTTP_NO_CONTENT : Returned when successful but no data",
-     *    206="HTTP_PARTIAL_CONTENT : Return when successful but it's the last recordings"
+     *    206="HTTP_PARTIAL_CONTENT : Return when successful but it's the last recordings",
      *    400="HTTP_BAD_REQUEST : Problem with your input"
      *  },
      *  requirements={
@@ -184,6 +182,7 @@ class AdvertRestController extends FOSRestController
      *    }
      *  },
      *  tags={
+     *    "Entity" = "[Advert, Comments]",
      *    "Alpha" = "#ff0000"
      *  }
      * )
@@ -191,7 +190,7 @@ class AdvertRestController extends FOSRestController
     public function getCommentsAdvertAction(Request $request, $id)
     {
 
-         // Set limit | default = 5
+        // Set limit | default = 5
         $limit = $request->get('limit') ? $request->get('limit') : 5;
         // Set offset | default = 0
         $offset = $request->get('offset') ? $request->get('offset') : 0;
