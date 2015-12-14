@@ -2,3 +2,9 @@ aa_platform_api:
     type: rest
     resource:     "AAPlatformBundle:AdvertRest"
     name_prefix:  api_
+
+
+aa_platform_post_api:
+    type: rest
+    resource:     "AAPlatformBundle:PostsRest"
+    name_prefix:  api_
