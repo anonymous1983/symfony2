@@ -68,4 +68,53 @@ Class PostsRestController extends FOSRestController
         // 202 :: HTTP_OK
         return  $this->view($posts, Response::HTTP_OK);
     }
+
+    /**
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get Post by id",
+     *  statusCodes={
+     *    200="HTTP_OK : Returned when successful",
+     *    204="HTTP_NO_CONTENT : Returned when successful but no data",
+     *    206="HTTP_PARTIAL_CONTENT : Return when successful but it's the last recordings"
+     *  },
+     *  tags={
+     *    "stable" = "#5e8014"
+     *  },
+     *  requirements={
+     *    {
+     *      "name"="id",
+     *      "dataType"="Integer",
+     *      "requirement"="\d+",
+     *      "description"="Id of advert"
+     *    },
+     *    {
+     *      "name"="_format",
+     *      "dataType"="String",
+     *      "requirement"="xml|json|html",
+     *      "description"="Request format"
+     *    },
+     *  }
+     * )
+     */
+    public function getPostAction($id)
+    {
+        if(is_numeric($id)){
+
+            $post = $this->getDoctrine()
+                ->getRepository("AAPlatformBundle:Posts")
+                ->find($id);
+
+            if(!$post){
+                return $this->view(null, Response::HTTP_NO_CONTENT);
+            }
+
+            return $this->view($post, Response::HTTP_OK);
+
+        }else{
+            // 400 :: HTTP_BAD_REQUEST
+            return  $this->view(null, Response::HTTP_BAD_REQUEST); 
+        }
+    }
 }
