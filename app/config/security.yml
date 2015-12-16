@@ -15,6 +15,7 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/platform/, role: ROLE_ADMIN }
+        - { path: ^/api/, role: ROLE_USER }
 
             # activate different ways to authenticate
 

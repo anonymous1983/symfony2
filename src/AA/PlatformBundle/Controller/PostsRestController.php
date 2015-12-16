@@ -73,7 +73,7 @@ Class PostsRestController extends FOSRestController
      *
      * @ApiDoc(
      *  resource=true,
-     *  description="Get Post by id",
+     *  description="Get Posts by id",
      *  statusCodes={
      *    200="HTTP_OK : Returned when successful",
      *    204="HTTP_NO_CONTENT : Returned when successful but no data",
@@ -117,4 +117,70 @@ Class PostsRestController extends FOSRestController
             return  $this->view(null, Response::HTTP_BAD_REQUEST); 
         }
     }
+
+    /**
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Add new Posts",
+     *  statusCodes={
+     *    200="Ok : Returned when successful"
+     *  },
+     *  requirements={
+     *    {
+     *      "name"="request",
+     *      "dataType"="Json",
+     *      "requirement"="\d+",
+     *      "description"="Posts Object"
+     *    }
+     *  },
+     *  tags={
+     *    "stable" = "#5e8014"
+     *  }
+     * )
+     */
+
+    public function postPostAction(Request $request)
+    {
+        
+        $entity = $this->getDoctrine()->getManager();
+
+        $post = new Posts();
+        $post->setDate(new \DateTime($request->get('date')))
+            ->setContent($request->get('content'))
+            ->setTitle($request->get('title'))
+            ->setStatus($request->get('status'))
+            ->setCommentStatus($request->get('comment_status'))
+            ->setDateModified(new \DateTime($request->get('date')))
+            ->setIdUser($this->get('security.token_storage')->getToken()->getUser()->getId())
+            ->setIdMenu($request->get('id_menu'))
+            ->setIdType($request->get('id_type'))
+            ->setIdCategory($request->get('id_category'));
+
+        $entity->persist($post);
+        $entity->flush();
+
+        return $this->redirectToRoute('api_get_post',
+            array('id' => $post->getId())
+        );
+        /*$securityContext = $this->container->get('security.authorization_checker');
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->get('security.token_storage')->getToken()->getUser()->getId();
+        }else{
+            return null;
+        }*/
+        
+    }
+
 }
+
+/*
+    Exmple Posts :
+    {
+        "date":"2015-12-16 15:02:08",
+        "title":"Hello world!",
+        "content":"Welcome to PlatformBundle. This is your first post. Edit or delete it, then start writing!",
+        "date_modified":"2015-12-16 15:02:09",
+        "id_user": "1"
+    }
+*/

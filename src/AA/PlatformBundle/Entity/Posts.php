@@ -24,21 +24,21 @@ class Posts
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="date", type="datetime", nullable=true)
      */
     private $date;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text", options={"default" = ""})
+     * @ORM\Column(name="content", type="text", nullable=true, options={"default" = ""})
      */
     private $content;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255, options={"default" = ""})
+     * @ORM\Column(name="title", type="string", length=255, nullable=true, options={"default" = ""})
      */
     private $title;
 
@@ -59,14 +59,14 @@ class Posts
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_modified", type="datetime")
+     * @ORM\Column(name="date_modified", type="datetime", nullable=true)
      */
     private $dateModified;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_user", type="integer")
+     * @ORM\Column(name="id_user", type="integer", options={"default" = 0})
      */
     private $idUser;
 
