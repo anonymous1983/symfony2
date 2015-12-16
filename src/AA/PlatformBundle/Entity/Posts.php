@@ -45,49 +45,49 @@ class Posts
     /**
      * @var integer
      *
-     * @ORM\Column(name="status", type="integer", options={"default" = 0})
+     * @ORM\Column(name="status", type="integer", nullable=true, options={"default" = 0})
      */
     private $status;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="comment_status", type="integer", options={"default" = 0})
+     * @ORM\Column(name="comment_status", type="integer", nullable=true, options={"default" = 0})
      */
     private $commentStatus;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_modified", type="datetime", nullable=true)
+     * @ORM\Column(name="date_modified", type="datetime", nullable=true, nullable=true)
      */
     private $dateModified;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_user", type="integer", options={"default" = 0})
+     * @ORM\Column(name="id_user", type="integer", nullable=true, options={"default" = 0})
      */
     private $idUser;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_menu", type="integer", options={"default" = 0})
+     * @ORM\Column(name="id_menu", type="integer", nullable=true, options={"default" = 0})
      */
     private $idMenu;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_type", type="integer", options={"default" = 0})
+     * @ORM\Column(name="id_type", type="integer", nullable=true, options={"default" = 0})
      */
     private $idType;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_category", type="integer", options={"default" = 0})
+     * @ORM\Column(name="id_category", type="integer", nullable=true, options={"default" = 0})
      */
     private $idCategory;
 

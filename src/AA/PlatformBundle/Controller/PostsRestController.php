@@ -146,23 +146,30 @@ Class PostsRestController extends FOSRestController
         $entity = $this->getDoctrine()->getManager();
 
         $post = new Posts();
-        $post->setDate(new \DateTime($request->get('date')))
+        $post->setDate(new \DateTime('NOW'))
             ->setContent($request->get('content'))
             ->setTitle($request->get('title'))
             ->setStatus($request->get('status'))
             ->setCommentStatus($request->get('comment_status'))
-            ->setDateModified(new \DateTime($request->get('date')))
+            ->setDateModified(new \DateTime('NOW'))
             ->setIdUser($this->get('security.token_storage')->getToken()->getUser()->getId())
             ->setIdMenu($request->get('id_menu'))
             ->setIdType($request->get('id_type'))
             ->setIdCategory($request->get('id_category'));
 
+
         $entity->persist($post);
         $entity->flush();
 
-        return $this->redirectToRoute('api_get_post',
-            array('id' => $post->getId())
-        );
+        if($entity){
+            return $this->redirectToRoute('api_get_post',
+                array('id' => $post->getId())
+            );
+        }else{
+            return  $this->view(null, Response::HTTP_INTERNAL_SERVER_ERROR); 
+        }
+
+        
         /*$securityContext = $this->container->get('security.authorization_checker');
         if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->get('security.token_storage')->getToken()->getUser()->getId();
@@ -176,11 +183,24 @@ Class PostsRestController extends FOSRestController
 
 /*
     Exmple Posts :
+
+    Headers:
+    ----------------
+    Content-Type: application/json; charset=utf-8
+
+    Content:
+    ----------------
     {
         "date":"2015-12-16 15:02:08",
-        "title":"Hello world!",
         "content":"Welcome to PlatformBundle. This is your first post. Edit or delete it, then start writing!",
+        "title":"Hello world!",
+        "status":1,
+        "comment_status":1,
         "date_modified":"2015-12-16 15:02:09",
-        "id_user": "1"
+        "id_user": null,
+        "id_menu": 0,
+        "id_type": 0,
+        "id_category": 0
     }
 */
+
