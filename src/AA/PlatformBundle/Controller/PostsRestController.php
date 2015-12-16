@@ -3,6 +3,7 @@
 namespace AA\PlatformBundle\Controller;
 
 
+use Doctrine\DBAL\DBALException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AA\PlatformBundle\Entity\Posts;
@@ -19,7 +20,8 @@ Class PostsRestController extends FOSRestController
      *  statusCodes={
      *    200="HTTP_OK : Returned when successful",
      *    204="HTTP_NO_CONTENT : Returned when successful but no data",
-     *    206="HTTP_PARTIAL_CONTENT : Return when successful but it's the last recordings"
+     *    206="HTTP_PARTIAL_CONTENT : Return when successful but it's the last recordings",
+     *    500="HTTP_INTERNAL_SERVER_ERROR : Return when you have server error"
      *  },
      *  tags={
      *    "stable" = "#5e8014"
@@ -44,29 +46,33 @@ Class PostsRestController extends FOSRestController
      */
     public function getPostsAction(Request $request)
     {
-        // Set limit | default = 5
-        $limit = $request->get('limit') ? $request->get('limit') : 5;
-        // Set offset | default = 0
-        $offset = $request->get('offset') ? $request->get('offset') : 0;
+        try {
+            // Set limit | default = 5
+            $limit = $request->get('limit') ? $request->get('limit') : 5;
+            // Set offset | default = 0
+            $offset = $request->get('offset') ? $request->get('offset') : 0;
 
-        $posts = $this->getDoctrine()
-            ->getRepository("AAPlatformBundle:Posts")
-            ->findBy(
-                array(),
-                array(),
-                $limit,
-                $offset
-            );
-        // 206 :: HTTP_PARTIAL_CONTENT
-        if (0 < count($posts) && count($posts) < $limit) {
-            return  $this->view($posts, Response::HTTP_PARTIAL_CONTENT);
+            $posts = $this->getDoctrine()
+                ->getRepository("AAPlatformBundle:Posts")
+                ->findBy(
+                    array(),
+                    array(),
+                    $limit,
+                    $offset
+                );
+            // 206 :: HTTP_PARTIAL_CONTENT
+            if (0 < count($posts) && count($posts) < $limit) {
+                return $this->view($posts, Response::HTTP_PARTIAL_CONTENT);
+            }
+            // 204 :: HTTP_NO_CONTENT
+            if (!$posts) {
+                return $this->view($posts, Response::HTTP_NO_CONTENT);
+            }
+            // 202 :: HTTP_OK
+            return $this->view($posts, Response::HTTP_OK);
+        } catch (DBALException $exception) {
+            return $this->view(null, Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        // 204 :: HTTP_NO_CONTENT
-        if (!$posts) {
-            return  $this->view($posts, Response::HTTP_NO_CONTENT);
-        }
-        // 202 :: HTTP_OK
-        return  $this->view($posts, Response::HTTP_OK);
     }
 
     /**
@@ -77,7 +83,8 @@ Class PostsRestController extends FOSRestController
      *  statusCodes={
      *    200="HTTP_OK : Returned when successful",
      *    204="HTTP_NO_CONTENT : Returned when successful but no data",
-     *    206="HTTP_PARTIAL_CONTENT : Return when successful but it's the last recordings"
+     *    206="HTTP_PARTIAL_CONTENT : Return when successful but it's the last recordings",
+     *    500="HTTP_INTERNAL_SERVER_ERROR : Return when you have server error"
      *  },
      *  tags={
      *    "stable" = "#5e8014"
@@ -97,24 +104,30 @@ Class PostsRestController extends FOSRestController
      *    },
      *  }
      * )
+     * @param $id
+     * @return \FOS\RestBundle\View\View
      */
     public function getPostAction($id)
     {
-        if(is_numeric($id)){
+        try {
+            if (is_numeric($id)) {
 
-            $post = $this->getDoctrine()
-                ->getRepository("AAPlatformBundle:Posts")
-                ->find($id);
+                $post = $this->getDoctrine()
+                    ->getRepository("AAPlatformBundle:Posts")
+                    ->find($id);
 
-            if(!$post){
-                return $this->view(null, Response::HTTP_NO_CONTENT);
+                if (!$post) {
+                    return $this->view(null, Response::HTTP_NO_CONTENT);
+                }
+
+                return $this->view($post, Response::HTTP_OK);
+
+            } else {
+                // 400 :: HTTP_BAD_REQUEST
+                return $this->view(null, Response::HTTP_BAD_REQUEST);
             }
-
-            return $this->view($post, Response::HTTP_OK);
-
-        }else{
-            // 400 :: HTTP_BAD_REQUEST
-            return  $this->view(null, Response::HTTP_BAD_REQUEST); 
+        } catch (DBALException $exception) {
+            return $this->view(null, Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -124,7 +137,8 @@ Class PostsRestController extends FOSRestController
      *  resource=true,
      *  description="Add new Posts",
      *  statusCodes={
-     *    200="Ok : Returned when successful"
+     *    200="Ok : Returned when successful",
+     *    500="HTTP_INTERNAL_SERVER_ERROR : Return when you have server error"
      *  },
      *  requirements={
      *    {
@@ -138,45 +152,45 @@ Class PostsRestController extends FOSRestController
      *    "stable" = "#5e8014"
      *  }
      * )
+     * @param Request $request
+     * @return \FOS\RestBundle\View\View|\Symfony\Component\HttpFoundation\RedirectResponse
      */
 
     public function postPostAction(Request $request)
     {
-        
-        $entity = $this->getDoctrine()->getManager();
+        try {
+            $post = new Posts();
+            $post->setDate(new \DateTime('NOW'))
+                ->setContent($request->get('content', ''))
+                ->setTitle($request->get('title', ''))
+                ->setStatus($request->get('status', 0))
+                ->setCommentStatus($request->get('comment_status', 0))
+                ->setDateModified(new \DateTime('NOW'))
+                ->setIdUser($this->get('security.token_storage')->getToken()->getUser()->getId())
+                ->setIdMenu($request->get('id_menu', 0))
+                ->setIdType($request->get('id_type', 0))
+                ->setIdCategory($request->get('id_category', 0));
 
-        $post = new Posts();
-        $post->setDate(new \DateTime('NOW'))
-            ->setContent($request->get('content'))
-            ->setTitle($request->get('title'))
-            ->setStatus($request->get('status'))
-            ->setCommentStatus($request->get('comment_status'))
-            ->setDateModified(new \DateTime('NOW'))
-            ->setIdUser($this->get('security.token_storage')->getToken()->getUser()->getId())
-            ->setIdMenu($request->get('id_menu'))
-            ->setIdType($request->get('id_type'))
-            ->setIdCategory($request->get('id_category'));
+            $entity = $this->getDoctrine()->getManager();
+            $entity->persist($post);
+            $entity->flush();
 
-
-        $entity->persist($post);
-        $entity->flush();
-
-        if($entity){
             return $this->redirectToRoute('api_get_post',
                 array('id' => $post->getId())
             );
-        }else{
-            return  $this->view(null, Response::HTTP_INTERNAL_SERVER_ERROR); 
+
+        } catch (DBALException $exception) {
+            return $this->view(null, Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        
+
         /*$securityContext = $this->container->get('security.authorization_checker');
         if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->get('security.token_storage')->getToken()->getUser()->getId();
         }else{
             return null;
         }*/
-        
+
     }
 
 }
