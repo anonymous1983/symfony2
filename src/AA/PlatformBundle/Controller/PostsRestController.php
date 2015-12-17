@@ -71,6 +71,7 @@ Class PostsRestController extends FOSRestController
             // 202 :: HTTP_OK
             return $this->view($posts, Response::HTTP_OK);
         } catch (DBALException $exception) {
+            // 500 :: HTTP_INTERNAL_SERVER_ERROR
             return $this->view(null, Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -127,6 +128,7 @@ Class PostsRestController extends FOSRestController
                 return $this->view(null, Response::HTTP_BAD_REQUEST);
             }
         } catch (DBALException $exception) {
+            // 500 :: HTTP_INTERNAL_SERVER_ERROR
             return $this->view(null, Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -188,6 +190,7 @@ Class PostsRestController extends FOSRestController
                 return $this->view(null, Response::HTTP_BAD_REQUEST);
             }
         } catch (DBALException $exception) {
+            // 500 :: HTTP_INTERNAL_SERVER_ERROR
             return $this->view(null, Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -196,12 +199,13 @@ Class PostsRestController extends FOSRestController
      *
      * @ApiDoc(
      *  resource=true,
-     *  description="Add new Posts",
+     *  description="Update new Posts",
      *  statusCodes={
      *    200="Ok : Returned when successful",
      *    500="HTTP_INTERNAL_SERVER_ERROR : Return when you have server error"
      *  },
      *  requirements={
+     *
      *    {
      *      "name"="request",
      *      "dataType"="Json",
@@ -241,19 +245,80 @@ Class PostsRestController extends FOSRestController
             );
 
         } catch (DBALException $exception) {
+            // 500 :: HTTP_INTERNAL_SERVER_ERROR
             return $this->view(null, Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-
-
-        /*$securityContext = $this->container->get('security.authorization_checker');
-        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->get('security.token_storage')->getToken()->getUser()->getId();
-        }else{
-            return null;
-        }*/
-
     }
 
+    /**
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Put Posts",
+     *  statusCodes={
+     *    200="Ok : Returned when successful",
+     *    500="HTTP_INTERNAL_SERVER_ERROR : Return when you have server error"
+     *  },
+     *  requirements={
+     *    {
+     *      "name"="id",
+     *      "dataType"="Integer",
+     *      "requirement"="\d+",
+     *      "description"="Id Posts"
+     *    },
+     *    {
+     *      "name"="request",
+     *      "dataType"="Json",
+     *      "requirement"="\d+",
+     *      "description"="Posts Object"
+     *    }
+     *  },
+     *  tags={
+     *    "stable" = "#5e8014"
+     *  }
+     * )
+     * @param Request $request
+     * @param Integer $id
+     * @return \FOS\RestBundle\View\View|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+
+    public function putPostAction($id, Request $request)
+    {
+        try {
+            $entity = $this->getDoctrine()
+                ->getEntityManager();
+
+            $repository = $entity->getRepository("AAPlatformBundle:Posts");
+
+            $post = $repository->find($id);
+
+
+            if (!$post) {
+                return $this->view(null, Response::HTTP_NO_CONTENT);
+            } else {
+                $post->setDate($post->getDate())
+                    ->setContent($request->get('content', $post->getContent()))
+                    ->setTitle($request->get('title', $post->getTitle()))
+                    ->setStatus($request->get('status', $post->getStatus()))
+                    ->setCommentStatus($request->get('comment_status', $post->getCommentStatus()))
+                    ->setDateModified(new \DateTime('NOW'))
+                    ->setIdUser($this->get('security.token_storage')->getToken()->getUser()->getId())
+                    ->setIdMenu($request->get('id_menu', $post->getIdMenu()))
+                    ->setIdType($request->get('id_type', $post->getIdType()))
+                    ->setIdCategory($request->get('id_category', $post->getIdCategory()));
+
+                $entity->persist($post);
+                $entity->flush();
+
+                return $this->view($post);
+            }
+
+
+        } catch (DBALException $exception) {
+            // 500 :: HTTP_INTERNAL_SERVER_ERROR
+            return $this->view(null, Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }
 
 /*
