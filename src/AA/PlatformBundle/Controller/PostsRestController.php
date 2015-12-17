@@ -135,6 +135,67 @@ Class PostsRestController extends FOSRestController
      *
      * @ApiDoc(
      *  resource=true,
+     *  description="Delete Posts by id",
+     *  statusCodes={
+     *    200="HTTP_OK : Returned when successful",
+     *    204="HTTP_NO_CONTENT : Returned when successful but no data",
+     *    206="HTTP_PARTIAL_CONTENT : Return when successful but it's the last recordings",
+     *    500="HTTP_INTERNAL_SERVER_ERROR : Return when you have server error"
+     *  },
+     *  tags={
+     *    "stable" = "#5e8014"
+     *  },
+     *  requirements={
+     *    {
+     *      "name"="id",
+     *      "dataType"="Integer",
+     *      "requirement"="\d+",
+     *      "description"="Id of advert"
+     *    },
+     *    {
+     *      "name"="_format",
+     *      "dataType"="String",
+     *      "requirement"="xml|json|html",
+     *      "description"="Request format"
+     *    },
+     *  }
+     * )
+     * @param $id
+     * @return \FOS\RestBundle\View\View
+     */
+    public function deletePostAction($id)
+    {
+        try {
+            if (is_numeric($id)) {
+
+                $entity = $this->getDoctrine()
+                    ->getEntityManager();
+
+                $repository = $entity->getRepository("AAPlatformBundle:Posts");
+
+                $post = $repository->find($id);
+
+                if (!$post) {
+                    return $this->view(null, Response::HTTP_NO_CONTENT);
+                } else {
+                    $entity->remove($post);
+                    $entity->flush();
+                    return $this->view($post, Response::HTTP_OK);
+                }
+
+            } else {
+                // 400 :: HTTP_BAD_REQUEST
+                return $this->view(null, Response::HTTP_BAD_REQUEST);
+            }
+        } catch (DBALException $exception) {
+            return $this->view(null, Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     *
+     * @ApiDoc(
+     *  resource=true,
      *  description="Add new Posts",
      *  statusCodes={
      *    200="Ok : Returned when successful",
@@ -196,7 +257,7 @@ Class PostsRestController extends FOSRestController
 }
 
 /*
-    Exmple Posts :
+    Exemple Posts :
 
     Headers:
     ----------------

@@ -10,7 +10,7 @@ rest :
 
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
-    prefix:   /api/v1/doc
+    prefix:   /doc/api/v1
 
 
 fos_user:
