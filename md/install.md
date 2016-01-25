@@ -51,6 +51,10 @@ php app/console doctrine:database:drop --force
 php app/console doctrine:database:create
 ```
 
+- Creating the Database Tables/Schema
+
+`php bin/console doctrine:schema:update --force`
+
 - Creating an Entity Class
 
 `php app/console doctrine:generate:entity`
