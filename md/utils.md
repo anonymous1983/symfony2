@@ -73,7 +73,7 @@ http://welcometothebundle.com/speedup-symfony-functional-tests-phpunit/
 
 `php app/console fos:user:active admin`
 
-`php ^pp/console fos:user:promote admin ROLE_ADMIN`
+`php app/console fos:user:promote admin ROLE_ADMIN`
 
 
 **to creat new entity comment**
